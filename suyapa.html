@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+  <title>suyapa guillen</title>
+  <style>
+    body {
+      color: ff0099;
+      text-align: center;
+      background: url("https://media.istockphoto.com/id/1436492315/photo/clouds-of-colorful-swirling-blue-and-pink-smoke.jpg?s=612x612&w=0&k=20&c=EcACV9fKjg2NNcuP0IdfcFbJi3ee0tBivwSujSUEzT8=");
+      background-size: cover;
+  
+}
+img {
+  width: 300px;
+  
+  }
+</style>
+</head>
+<body>
+  <img src="https://steamuserimages-a.akamaihd.net/ugc/2041857428767365495/8BCDCFD97841820A555C22FCE583C2DAA8E17263/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false">
+  
+  <p>Hi! I'm suyapa :3</p>
+  <input id="Name" type="email" placeholder="Your name">
+  <input id="Email" type placeholder="Your email">
+  <input id="Age" placeholder="Your age">
+  <input id="submit" type="submit">
+</body>
+
+	
+	<script type="module">
+	  // Import the functions you need from the SDKs you need
+	  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+	  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+	  // TODO: Add SDKs for Firebase products that you want to use
+	  // https://firebase.google.com/docs/web/setup#available-libraries
+
+	  // Your web app's Firebase configuration
+	  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+	  const firebaseConfig = {
+	    apiKey: "AIzaSyBqKjDSv7O2GD6DZrjo4swizjCD24-XWEY",
+	    authDomain: "suyapa1-7cf56.firebaseapp.com",
+	    projectId: "suyapa1-7cf56",
+	    storageBucket: "suyapa1-7cf56.firebasestorage.app",
+	    messagingSenderId: "733874270241",
+	    appId: "1:733874270241:web:aaf07891753a77dbe77360"
+	  };
+
+	  // Initialize Firebase
+	  const app = initializeApp(firebaseConfig);
+	  const db = getDatabase(app);
+	  
+
+	
+const Name = document.querySelector("#Name") 
+const Email = document.querySelector("#Email")
+const Age = document.querySelector("#Age")	  
+document.querySelector('#submit').addEventListener('click', Submit)
+	
+	
+	  function Submit() {
+	  	  const timestamp = buildTimestamp()
+	  
+	  	  set(ref(db, timestamp), {
+	  		  Name: Name.value,
+	  	      email: Email.value,
+			   Age: Age.value,
+	  	  });
+
+	  	  Name.value = ""
+	  	  Email.value = ""
+		  Age.value = ""
+	  	}
+
+		function buildTimestamp() {
+			  const now = new Date();
+			  let timestamp = now.getFullYear().toString() + "/";
+			  //const month = now.toLocaleString('default', { month: 'long' });
+
+			  let month = now.getMonth()+1   //add 1 because Javascript uses 0 for January
+			  month = month.toString()
+			  month = addLeadingZero(month)
+			  timestamp += month + "/"; 
+
+			  let date = now.getDate().toString()
+			  date = addLeadingZero(date)
+			  timestamp += date + "/";
+
+			  let hours = now.getHours().toString()
+			  hours = addLeadingZero(hours)
+			  timestamp += hours + ":";
+
+			  let minutes = now.getMinutes().toString()
+			  minutes = addLeadingZero(minutes)
+			  timestamp += minutes + ":";
+
+			  let seconds = now.getSeconds().toString()
+			  seconds = addLeadingZero(seconds)
+			  timestamp += seconds;
+  
+			  return timestamp
+			}
+	
+			function addLeadingZero(units) {
+				if (units.length < 2) {
+					units = "0" + units
+				}
+				return units
+			}
+	
+	
+	
+	</script>
+	  
